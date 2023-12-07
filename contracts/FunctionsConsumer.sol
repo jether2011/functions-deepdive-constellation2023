@@ -33,7 +33,7 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
    * @notice Triggers an on-demand Functions request using remote encrypted secrets
    * @param source JavaScript source code
    * @param secretsLocation Location of secrets (only Location.Remote & Location.DONHosted are supported)
-   * @param encryptedSecretsReference Reference pointing to encrypted secrets
+   * encryptedSecretsReference Reference pointing to encrypted secretsx
    * @param args String arguments passed into the source code and accessible via the global variable `args`
    * @param bytesArgs Bytes arguments passed into the source code and accessible via the global variable `bytesArgs` as hex strings
    * @param subscriptionId Subscription ID used to pay for request (FunctionsConsumer contract address must first be added to the subscription)

@@ -1,15 +1,15 @@
 const { Contract } = require("ethers");
+const { Location } = require("@chainlink/functions-toolkit");
 const fs = require("fs");
 const path = require("path");
-const { Location } = require("@chainlink/functions-toolkit");
 require("@chainlink/env-enc").config();
 
 const { signer } = require("../connection.js");
 const { abi } = require("../contracts/abi/FunctionsConsumer.json");
 
-const consumerAddress = "0x01568F134A64b8c525E468908a3850B6c6A55F54";
+const consumerAddress = "0x91f48b4463612d23ee54777cfc4d94d824b69d7e";
 const subscriptionId = "1079";
-const encryptedSecretsRef = "0xa266736c6f744964006776657273696f6e1a65540efa";
+// const encryptedSecretsRef = "0xa266736c6f744964006776657273696f6e1a65540efa";
 
 const sendRequest = async () => {
   if (!consumerAddress || !subscriptionId) {

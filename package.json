@@ -4,8 +4,9 @@
     "name": "Zubin Pratap"
   },
   "scripts": {
-    "deploy": "node scripts/01_deployConsumer.ts",
-    "listen": "nodemon scripts/06_listen.ts"
+    "deployConsumer": "node scripts/01_deployConsumers.js",
+    "makeRequest": "node scripts/04_request.js",
+    "readResponse": "node scripts/05_readResponse.js"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.8.0",

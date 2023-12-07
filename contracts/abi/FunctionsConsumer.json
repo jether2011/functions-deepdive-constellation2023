@@ -211,11 +211,6 @@
           "type": "uint8"
         },
         {
-          "internalType": "bytes",
-          "name": "encryptedSecretsReference",
-          "type": "bytes"
-        },
-        {
           "internalType": "string[]",
           "name": "args",
           "type": "string[]"
