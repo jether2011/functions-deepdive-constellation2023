@@ -4,7 +4,7 @@ const { Contract } = require("ethers");
 const { signer } = require("../connection.js");
 const { abi } = require("../contracts/abi/FunctionsConsumer.json");
 
-const consumerAddress = "0x91f48b4463612d23ee54777cfc4d94d824b69d7e";
+const consumerAddress = "0x360af0fc607725663d39aa6d20351d82a969a61d";
 const readResponse = async () => {
   const functionsConsumer = new Contract(consumerAddress, abi, signer);
 
@@ -12,8 +12,9 @@ const readResponse = async () => {
   console.log("\nResponse Bytes : ", responseBytes)
 
   const decodedResponse = decodeResult(responseBytes, ReturnType.string)
-
-  console.log("\nDecoded response from OpenAI/ChatGPT:", decodedResponse)
+  
+  console.log("\nDecoded response from NFE Service:");
+  console.log(decodedResponse);
 };
 
 readResponse().catch(err => {

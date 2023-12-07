@@ -7,7 +7,7 @@ require("@chainlink/env-enc").config();
 const { signer } = require("../connection.js");
 const { abi } = require("../contracts/abi/FunctionsConsumer.json");
 
-const consumerAddress = "0x91f48b4463612d23ee54777cfc4d94d824b69d7e";
+const consumerAddress = "0x360af0fc607725663d39aa6d20351d82a969a61d";
 const subscriptionId = "1079";
 // const encryptedSecretsRef = "0xa266736c6f744964006776657273696f6e1a65540efa";
 
@@ -24,8 +24,9 @@ const sendRequest = async () => {
   const prompt = "Describe what a blockchain is in 15 words or less";
   const args = [prompt];
   const callbackGasLimit = 300_000;
+  //const callbackGasLimit = 3_900_000_000;
 
-  console.log("\n Sending the Request....");
+  console.log("\n Sending the Request....\n");
   const requestTx = await functionsConsumer.sendRequest(
     source,
     Location.DONHosted,
@@ -37,9 +38,17 @@ const sendRequest = async () => {
   );
 
   const txReceipt = await requestTx.wait(1);
-  const requestId = txReceipt.events[2].args.id;
+
   console.log(
-    `\nRequest made.  Request Id is ${requestId}. TxHash is ${requestTx.hash}`,
+    `
+    \nRequest made.  
+    \nBlockHash: ${txReceipt.blockHash},
+    \nBlockNumber: ${txReceipt.blockNumber},
+    \nGasPrice: ${txReceipt.gasPrice},
+    \nCumulativeGasUsed: ${txReceipt.cumulativeGasUsed},
+    \nFrom: ${txReceipt.from},
+    \nTo: ${txReceipt.to}
+    `
   );
 };
 

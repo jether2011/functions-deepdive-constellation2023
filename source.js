@@ -13,5 +13,4 @@ if (carbonResponse.error) {
 
 const result = carbonResponse.data;
 
-console.log(result);
 return Functions.encodeString(result);

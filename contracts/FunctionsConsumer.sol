@@ -6,7 +6,7 @@ import {ConfirmedOwner} from "@chainlink/contracts/src/v0.8/shared/access/Confir
 import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0_0/libraries/FunctionsRequest.sol";
 
 /**
- * @title Chainlink Functions example on-demand consumer contract example
+ * @title Chainlink Functions on-demand consumer contract
  */
 contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
   using FunctionsRequest for FunctionsRequest.Request;
@@ -33,7 +33,6 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
    * @notice Triggers an on-demand Functions request using remote encrypted secrets
    * @param source JavaScript source code
    * @param secretsLocation Location of secrets (only Location.Remote & Location.DONHosted are supported)
-   * encryptedSecretsReference Reference pointing to encrypted secretsx
    * @param args String arguments passed into the source code and accessible via the global variable `args`
    * @param bytesArgs Bytes arguments passed into the source code and accessible via the global variable `bytesArgs` as hex strings
    * @param subscriptionId Subscription ID used to pay for request (FunctionsConsumer contract address must first be added to the subscription)
@@ -42,22 +41,23 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
   function sendRequest(
     string calldata source,
     FunctionsRequest.Location secretsLocation,
-    // bytes calldata encryptedSecretsReference,
     string[] calldata args,
     bytes[] calldata bytesArgs,
     uint64 subscriptionId,
     uint32 callbackGasLimit
   ) external onlyOwner {
-    FunctionsRequest.Request memory req; // Struct API reference: https://docs.chain.link/chainlink-functions/api-reference/functions-request
+    FunctionsRequest.Request memory req;
     req.initializeRequest(FunctionsRequest.Location.Inline, FunctionsRequest.CodeLanguage.JavaScript, source);
     req.secretsLocation = secretsLocation;
-    // req.encryptedSecretsReference = encryptedSecretsReference;
+    
     if (args.length > 0) {
       req.setArgs(args);
     }
+
     if (bytesArgs.length > 0) {
       req.setBytesArgs(bytesArgs);
     }
+
     s_lastRequestId = _sendRequest(req.encodeCBOR(), subscriptionId, callbackGasLimit, donId);
   }
 
