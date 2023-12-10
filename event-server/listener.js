@@ -1,8 +1,17 @@
 require("@chainlink/env-enc").config();
+
 const { ethers, Wallet } = require("ethers");
 
 const ALCHEMY_WSS_URL = process.env.ALCHEMY_WSS_URL;
 const ALCHEMY_RPC_URL = process.env.ALCHEMY_RPC_URL;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+
+if (!ALCHEMY_WSS_URL || !ALCHEMY_RPC_URL || !PRIVATE_KEY) {
+    console.log(`Alchemy wss: ${ALCHEMY_WSS_URL}`);
+    console.log(`Alchemy rpc: ${ALCHEMY_RPC_URL}`);
+    console.log(`Alchemy private key: ${PRIVATE_KEY}`);
+    throw new Error("Please set the environment variable");
+}
 
 const CONSUMER_CONTRACT_ADDRESS = "0x0dC1B5cB19095Bb39c6740615A2995eb67226955";
 const CONSUMER_ABI_JSON = require("./abi/GaiaCarbonFunctionsConsumer.json");
@@ -10,7 +19,6 @@ const NFT_CONTRACT_ADDRESS = "0x83CDA4fee13B2e7F59186013035E00de0eAD8d3A";
 const NFT_ABI_JSON = require("./abi/GaiaCarbonNFT.json");
 
 const IPFS_IMAGE_URL = "https://chocolate-improved-peacock-407.mypinata.cloud/ipfs/QmQFmmvu3XJqfsmJPtfcZMfx2avbwHohLnWbVfnCZtYWr4";
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 const provider = new ethers.WebSocketProvider(ALCHEMY_WSS_URL);
 const contract = new ethers.Contract(CONSUMER_CONTRACT_ADDRESS, CONSUMER_ABI_JSON, provider);
