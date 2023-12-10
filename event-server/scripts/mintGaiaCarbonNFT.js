@@ -1,7 +1,8 @@
+require("@chainlink/env-enc").config();
 const { ethers, Wallet } = require("ethers");
 
-const ALCHEMY_RPC_URL = "https://polygon-mumbai.g.alchemy.com/v2/KJNNaI4fr2-XuW876bcCIJyfLxm9si2m";
-const PRIVATE_KEY = "ce2c94c4962f7e11f468bcb45fc6fd688306cc7d9b1e3675a706736a2f989f33";
+const ALCHEMY_RPC_URL = process.env.ALCHEMY_RPC_URL;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const NFT_CONTRACT_ADDRESS = "0x83CDA4fee13B2e7F59186013035E00de0eAD8d3A";
 const NFT_ABI_JSON = require("../abi/GaiaCarbonNFT.json");
 const IPFS_IMAGE_URL = "https://chocolate-improved-peacock-407.mypinata.cloud/ipfs/QmQFmmvu3XJqfsmJPtfcZMfx2avbwHohLnWbVfnCZtYWr4";
